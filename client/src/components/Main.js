@@ -1,8 +1,9 @@
 import React from 'react';
 import '../css/main.css'
 import 'font-awesome/css/font-awesome.min.css';
-import axios from 'axios';
+import dataService from '../services/dataService'
 import Card from './Card';
+import axios from 'axios';
 
 class Main extends React.Component {
   constructor(props) {
@@ -15,7 +16,9 @@ class Main extends React.Component {
 
   componentDidMount() {
     //fetch or axios api
-    axios.get(`${process.env.REACT_APP_API_URL}/pokemon`)
+
+    // Old way
+    axios.get(`https://w0448225-fullstack.onrender.com/pokemon`)
     .then(response=>{
       this.setState({
         pokemon: response.data,
