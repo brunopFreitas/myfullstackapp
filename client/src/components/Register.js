@@ -15,7 +15,7 @@ const Register = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        axios.post('http://localhost:5000/pokemon/user/register', { firstName, lastName, email, password })
+        axios.post(`${process.env.REACT_APP_API_URL}/pokemon/user/register`, { firstName, lastName, email, password })
         .then(
             response => {
                 if(response.status=== 201) {

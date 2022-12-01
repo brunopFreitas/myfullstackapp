@@ -15,7 +15,7 @@ class Main extends React.Component {
 
   componentDidMount() {
     //fetch or axios api
-    axios.get('http://localhost:5000/pokemon')
+    axios.get(`${process.env.REACT_APP_API_URL}/pokemon`)
     .then(response=>{
       this.setState({
         pokemon: response.data,
