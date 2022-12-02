@@ -1,4 +1,5 @@
 import React from 'react';
+import authService from '../services/authService';
 
 const NavBar = () => {
     return (
@@ -28,7 +29,7 @@ const NavBar = () => {
               <div className="dropdown-menu" aria-labelledby="dropdown07">
                 <a className="dropdown-item" href="/#">Action</a>
                 <a className="dropdown-item" href="/#">Another action</a>
-                <a className="dropdown-item" href="/#">Something else here</a>
+                <a className="dropdown-item" href="/signin" onClick={e => authService.signout()}>Logout</a>
               </div>
             </li>
           </ul>

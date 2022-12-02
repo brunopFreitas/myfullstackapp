@@ -115,17 +115,19 @@ router.get("/", async (req, res) => {
 // POST
 router.post("/", (req, res) => {
 
+    // Taking off some mandatory fields
+    // type: req.body.type,
+    // height: req.body.height,
+    // weight: req.body.weight,
+    // weaknesses: req.body.weaknesses,
+    // next_evolution: req.body.next_evolution
+
     if (validateJWT.checkMyJWT(req.get(headerName))) {
         const pokemon = new Pokemon({
             id: req.body.id,
             num: req.body.num,
             name: req.body.name,
-            img: req.body.img,
-            type: req.body.type,
-            height: req.body.height,
-            weight: req.body.weight,
-            weaknesses: req.body.weaknesses,
-            next_evolution: req.body.next_evolution
+            img: req.body.img
         });
 
         pokemon.save()

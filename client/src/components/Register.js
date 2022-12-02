@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import '../css/signin.css';
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
+import authService from '../services/authService';
 
 
 
@@ -15,25 +15,15 @@ const Register = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        axios.post(`${process.env.REACT_APP_API_URL}/pokemon/user/register`, { firstName, lastName, email, password })
-        .then(
-            response => {
-                if(response.status=== 201) {
-                    localStorage.setItem('token', response.headers['x-auth-token'])
-                    navigate('/')
-                    // axios.post('http://localhost:5000/pokemon/user/login', { email, password })
-                    // .then(
-                    //     response => {
-                    //         if(response.status=== 200) {
-                    //         localStorage.setItem('token', response.headers['x-auth-token'])
-                    //         navigate('/')
-                    //         }
-                    //     }
-                    // )
-                }
+        authService.register({ firstName, lastName, email, password },(signinSucess)=> {
+            if(signinSucess) {
+                navigate('/')
             }
-        )
-
+            else {
+                navigate('/register')
+                console.log('You are not cool!!!')
+            }
+        })
     }
 
     return ( 

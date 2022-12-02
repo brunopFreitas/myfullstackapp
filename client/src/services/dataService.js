@@ -3,7 +3,7 @@ import axios from 'axios'
 class dataService{
 
     getData(callback){
-        axios.get(`https://w0448225-fullstack.onrender.com/pokemon`)
+        axios.get(`${process.env.REACT_APP_API_URL}/pokemon`)
         .then(response=>{
             callback(response.data)
         })
@@ -14,7 +14,18 @@ class dataService{
 
     }
 
-    createData(){
+    createData(APIdata, token, callback){
+        axios.post(`${process.env.REACT_APP_API_URL}/pokemon`, APIdata, token)
+        .then(
+            response => {
+                if(response.status=== 201) {
+                    callback(true)
+                }
+            })
+            .catch( error=>{
+                console.log(error.response)
+                callback(false)
+            })
 
     }
 

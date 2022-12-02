@@ -4,7 +4,7 @@ class authService {
 
     signin(credentials, callback){
         // take care of login
-        axios.post(`https://w0448225-fullstack.onrender.com/pokemon/user/login`, credentials)
+        axios.post(`${process.env.REACT_APP_API_URL}/pokemon/user/login`, credentials)
         .then(
             response => {
                 if(response.status=== 200) {
@@ -18,16 +18,29 @@ class authService {
             })
     }
 
-    register(){
+    register(credentials, callback){
         // take care of register
+        axios.post(`${process.env.REACT_APP_API_URL}/pokemon/user/register`, credentials)
+        .then(
+            response => {
+                if(response.status=== 201) {
+                    localStorage.setItem('token', response.headers['x-auth-token'])
+                    callback(true)
+                }
+            })
+            .catch( error=>{
+                console.log(error.response)
+                callback(false)
+            })
     }
 
     isAuthenticated(){
         // do stuff after login
-        return localStorage.getItem('token') !== null
+        return localStorage.getItem('token')
     }
 
     signout(){
+        console.log('Im here')
         localStorage.removeItem('token')
     }
 }

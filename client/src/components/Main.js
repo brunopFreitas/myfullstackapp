@@ -1,9 +1,8 @@
 import React from 'react';
 import '../css/main.css'
 import 'font-awesome/css/font-awesome.min.css';
-import dataService from '../services/dataService'
 import Card from './Card';
-import axios from 'axios';
+import dataService from '../services/dataService';
 
 class Main extends React.Component {
   constructor(props) {
@@ -16,21 +15,14 @@ class Main extends React.Component {
 
   componentDidMount() {
     //fetch or axios api
-
-    // Old way
-    axios.get(`https://w0448225-fullstack.onrender.com/pokemon`)
-    .then(response=>{
-      this.setState({
-        pokemon: response.data,
-      }
+    dataService.getData(pokemon => {
+      this.setState(
+        { pokemon }
       )
     })
-  }
+   }
 
   render() {
-
-    //Sample
-    // console.log(localStorage.getItem('foo'))
 
     return ( 
       <div>
@@ -46,13 +38,15 @@ class Main extends React.Component {
             </div>
           </div>
         </section>
-
+        <div class="row justify-content-center bg-light pt-1">
+          <a href='/create'><button className="btn btn-primary" type="button">Create a Pokemon</button></a>
+        </div>
         <div className="album py-5 bg-light">
           <div className="container">
             <div className="row">
 
               {
-                this.state.pokemon.slice(0,9).map(item => {
+                this.state.pokemon.slice(-9).map(item => {
                   return (
                     <Card pokemon={item}/>
                   )

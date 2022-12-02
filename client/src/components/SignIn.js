@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../css/signin.css';
 import { useNavigate } from "react-router-dom";
 import authService from '../services/authService'
+import axios from 'axios'
 
 
 
@@ -13,12 +14,14 @@ const SignIn = (props) => {
 
     const handleSubmit = event => {
         event.preventDefault()
-        
+       
+        //New way
         authService.signin({ email, password }, (signinSucess)=> {
             if(signinSucess) {
                 navigate('/')
             }
             else {
+                navigate('/signin')
                 console.log('You are not cool!!!')
             }
         })
