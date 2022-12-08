@@ -5,6 +5,7 @@ import SignIn from './components/SignIn';
 import Footer from './components/Footer';
 import Register from './components/Register';
 import CreatePokemon from './components/CreateForm';
+import ProtectedRoutes from './ProtectedRoutes'
 import './css/app.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
@@ -19,8 +20,10 @@ const App = () => {
           <Routes>
               <Route path='/' element={<Main />}/>
               <Route path='/signin' element={<SignIn />}/>
+              <Route element={<ProtectedRoutes/>}>
+                <Route path='/create' element={<CreatePokemon />}/>
+              </Route>
               <Route path='/register' element={<Register />}/>
-              <Route path='/create' element={<CreatePokemon />}/>
               <Route path='*' element={<NotFound />}/>
             </Routes>
           </div>

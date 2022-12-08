@@ -40,7 +40,6 @@ class authService {
     }
 
     signout(){
-        console.log('Im here')
         localStorage.removeItem('token')
     }
 }
