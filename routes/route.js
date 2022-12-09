@@ -24,20 +24,19 @@ router.post("/user/register", async (req, res) => {
         password: req.body.password
     });
 
-    //Querying mongo
+        //Querying mongo
     const checkForEmail = await User.findOne({
         email: user.email
     })
 
     if (!checkForEmail) {
-
         // encrypting
         user.password = await bcrypt.hash(user.password, 1)
 
         //Saving
         user.save()
             .then(data => {
-                newJWT = jwt.sign(req.body.email, process.env.JWT)
+                newJWT = jwt.sign({email: req.body.email}, process.env.JWT)
                 res.header('Access-Control-Expose-Headers', headerName)
                 res.header(headerName, newJWT)
                 res.status(201).json({
@@ -55,7 +54,7 @@ router.post("/user/register", async (req, res) => {
         res.status(400).json({
             message: "email already registered."
         })
-    }
+    }    
 
 })
 
@@ -79,7 +78,7 @@ router.post("/user/login", async (req, res) => {
 
 
             if (result) {
-                newJWT = jwt.sign(req.body.email, process.env.JWT)
+                newJWT = jwt.sign({email: req.body.email}, process.env.JWT)
                 res.header('Access-Control-Expose-Headers', headerName)
                 res.header(headerName, newJWT)
                 res.status(200).send()
@@ -197,6 +196,13 @@ router.delete("/:Id", async (req, res) => {
 
 router.put("/:Id", async (req, res) => {
 
+    // Taking some fields out
+    // type: req.body.type,
+    // height: req.body.height,
+    // weight: req.body.weight,
+    // weaknesses: req.body.weaknesses,
+    // next_evolution: req.body.next_evolution
+
     if (validateJWT.checkMyJWT(req.get(headerName))) {
         try {
             const updatedPokemon = await Pokemon.updateOne({
@@ -207,11 +213,6 @@ router.put("/:Id", async (req, res) => {
                     num: req.body.num,
                     name: req.body.name,
                     img: req.body.img,
-                    type: req.body.type,
-                    height: req.body.height,
-                    weight: req.body.weight,
-                    weaknesses: req.body.weaknesses,
-                    next_evolution: req.body.next_evolution
                 }
             })
             if (updatedPokemon.matchedCount === 0) {

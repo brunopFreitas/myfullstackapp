@@ -9,12 +9,11 @@ class authService {
             response => {
                 if(response.status=== 200) {
                     localStorage.setItem('token', response.headers['x-auth-token'])
-                    callback(true)
+                    callback(null)
                 }
             })
             .catch(error => {
-                console.log(error.response)
-                callback(false)
+                callback(error.response)
             })
     }
 
@@ -25,12 +24,11 @@ class authService {
             response => {
                 if(response.status=== 201) {
                     localStorage.setItem('token', response.headers['x-auth-token'])
-                    callback(true)
+                    callback(null)
                 }
             })
-            .catch( error=>{
-                console.log(error.response)
-                callback(false)
+            .catch( error => {
+                callback(error.response)
             })
     }
 

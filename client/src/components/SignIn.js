@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../css/signin.css';
 import { useNavigate } from "react-router-dom";
 import authService from '../services/authService'
-import axios from 'axios'
+import {emailValidator, passwordValidator} from './Validator'
 
 
 
@@ -10,37 +10,42 @@ const SignIn = (props) => {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [errors, setErrors] = useState('')
+    const [emailError, setEmailError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
     const navigate = useNavigate();
 
     const handleSubmit = event => {
         event.preventDefault()
-       
-        //New way
-        authService.signin({ email, password }, (signinSucess)=> {
-            if(signinSucess) {
-                navigate('/')
-            }
-            else {
-                navigate('/signin')
-                console.log('You are not cool!!!')
-            }
-        })
-
-        //Old way
-        // axios.post(`${process.env.REACT_APP_API_URL}/pokemon/user/login`, { email, password })
-        // .then(
-        //     response => {
-        //         if(response.status=== 200) {
-        //             localStorage.setItem('token', response.headers['x-auth-token'])
-        //             navigate('/')
-        //         }
-        //     }
-        //     )
+        const isEmailValid = emailValidator(email)
+        if(isEmailValid !== "") {
+            setEmailError(isEmailValid)
+        }
+        const isPasswordValid = passwordValidator(password)
+        if(isPasswordValid !== "") {
+            setPasswordError(isPasswordValid)
+        }
+        if(isEmailValid === "" && isPasswordValid === "")
+        {       
+            authService.signin({ email, password }, (error)=> {
+                if(!error) {
+                    navigate('/')
+                }
+                else {
+                    if(error.status===401) {
+                        setErrors(error.data.message)
+                    }
+                }
+            })
+        }
 
     }
 
     return ( 
         <form className="form-signin" onSubmit={handleSubmit}>
+            <p className={errors ? 'alert alert-danger text-center' : 'hidden'}>{errors}</p>
+            <p className={emailError ? 'alert alert-danger text-center' : 'hidden'}>{emailError}</p>
+            <p className={passwordError ? 'alert alert-danger text-center' : 'hidden'}>{passwordError}</p>
             <h1 className="h3 mb-3 font-weight-normal text-center">Please sign in</h1>
             <label htmlFor="inputEmail" className="sr-only">Email address</label>
             <input onChange={e => setEmail(e.target.value)} name="email" type="email" id="inputEmail" className="form-control" placeholder="Email address" required autoFocus />

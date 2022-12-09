@@ -1,14 +1,29 @@
 import React from 'react';
+import { Link, useEffect } from 'react-router-dom';
 import authService from '../services/authService';
+import logo from '../img/pokemon_logo.png'
+import jwt_decode from "jwt-decode";
 
 const NavBar = () => {
+
+    const getUserEmail = () => {
+      let token = authService.isAuthenticated()
+      if(token) {
+        let userCredential = jwt_decode(token)
+        return (
+          userCredential.email
+        )
+      }
+      
+    }
+
     return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container">
-        <a href="/#" className="navbar-brand d-flex align-items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" aria-hidden="true" className="mr-2" viewBox="0 0 24 24" focusable="false"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+        <Link to={`/`} className="navbar-brand d-flex align-items-center">
+          <img src={logo} className='logo-img'/>
           <strong>My Fullstack App</strong>
-        </a>
+        </Link>
         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample07" aria-controls="navbarsExample07" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
@@ -16,23 +31,25 @@ const NavBar = () => {
         <div className="collapse navbar-collapse" id="navbarsExample07">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
-              <a className="nav-link" href="/#">Home <span className="sr-only">(current)</span></a>
+              <Link to={`/`} className="nav-link">Home <span className="sr-only">(current)</span></Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link" href="/#">Link</a>
+            <li className="nav-item active">
+              <Link to={`/signin`} className="nav-link">Login <span className="sr-only">(current)</span></Link>
             </li>
-            <li className="nav-item">
-              <a className="nav-link disabled" href="/#">Disabled</a>
-            </li>
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="/#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-              <div className="dropdown-menu" aria-labelledby="dropdown07">
-                <a className="dropdown-item" href="/#">Action</a>
-                <a className="dropdown-item" href="/#">Another action</a>
-                <a className="dropdown-item" href="/signin" onClick={e => authService.signout()}>Logout</a>
-              </div>
+            <li className="nav-item active">
+              <Link to={`/register`} className="nav-link">Register <span className="sr-only">(current)</span></Link>
             </li>
           </ul>
+        </div>
+        <div className={authService.isAuthenticated() ? 'nav-item dropdown' : 'hidden'}>
+              <a className="dropdown-toggle text-white text-decoration-none" href="/#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {
+                  "Welcome " + getUserEmail()
+                }
+                </a>
+              <div className="dropdown-menu" aria-labelledby="dropdown07">
+                <Link to={`/signin`} className="dropdown-item" onClick={e => authService.signout()}>Logout</Link>
+              </div>
         </div>
       </div>
     </nav>

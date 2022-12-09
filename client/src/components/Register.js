@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import '../css/signin.css';
 import { useNavigate } from "react-router-dom";
 import authService from '../services/authService';
+import { firstNameValidator, lastNameValidator, emailValidator, passwordValidator} from './Validator'
 
 
 
@@ -11,23 +12,51 @@ const Register = (props) => {
     const [lastName, setLastName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [firstNameError, setFirstNameError] = useState('')
+    const [lastNameError, setLastNameError] = useState('')
+    const [emailError, setEmailError] = useState('')
+    const [passwordError, setPasswordError] = useState('')
     const navigate = useNavigate();
 
     const handleSubmit = event => {
         event.preventDefault()
-        authService.register({ firstName, lastName, email, password },(signinSucess)=> {
-            if(signinSucess) {
-                navigate('/')
-            }
-            else {
-                navigate('/register')
-                console.log('You are not cool!!!')
-            }
-        })
+        const isFirstNameValid = firstNameValidator(firstName)
+        if(isFirstNameValid !== "") {
+            setFirstNameError(isFirstNameValid)
+        }
+        const isLastNameValid = lastNameValidator(lastName)
+        if(isLastNameValid !== "") {
+            setLastNameError(isLastNameValid)
+        }
+        const isEmailValid = emailValidator(email)
+        if(isEmailValid !== "") {
+            setEmailError(isEmailValid)
+        }
+        const isPasswordValid = passwordValidator(password)
+        if(isPasswordValid !== "") {
+            setPasswordError(isPasswordValid)
+        }
+
+        if(isFirstNameValid === "" && isLastNameValid === "" && isEmailValid === "" && isPasswordValid === "")
+        {
+            authService.register({ firstName, lastName, email, password },(error)=> {
+                if(!error) {
+                    navigate('/')
+                }
+                else {
+                    console.log(error)
+                }
+            })
+        }
     }
+    
 
     return ( 
         <form className="form-signin" onSubmit={handleSubmit}>
+            <p className={firstNameError ? 'alert alert-danger text-center' : 'hidden'}>{firstNameError}</p>
+            <p className={lastNameError ? 'alert alert-danger text-center' : 'hidden'}>{lastNameError}</p>
+            <p className={emailError ? 'alert alert-danger text-center' : 'hidden'}>{emailError}</p>
+            <p className={passwordError ? 'alert alert-danger text-center' : 'hidden'}>{passwordError}</p>
             <h1 className="h3 mb-3 font-weight-normal text-center">Please Register</h1>
             <label htmlFor="inputFirstName" className="sr-only">First Name</label>
             <input onChange={e => setFirstName(e.target.value)} name="firstName" type="text" id="firstName" className="form-control" placeholder="Enter First Name" required autoFocus />

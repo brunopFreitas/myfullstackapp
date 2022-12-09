@@ -1,8 +1,35 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
+import dataService from '../services/dataService';
+import authService from '../services/authService';
+import { Link } from 'react-router-dom';
 
 const Card = props => {
+
+  const navigate = useNavigate();
+
+  function deleteThisPokemon (id)  {
+    const token = authService.isAuthenticated();
+    if(token) {
+        const config = {
+          headers:{
+            'x-auth-token': token,
+          }
+        };
+        dataService.deleteData(id, config, (deleteSuccess)=> {
+          if(deleteSuccess) {
+            console.log(deleteSuccess)
+          }
+          else {
+            console.log(deleteSuccess)
+          }
+      })
+    }
+  }
+
+
     return ( 
-        <div className="col-md-4">
+        <div className="col-md-4" key={props.pokemon.id}>
                 <div className="card mb-4 box-shadow">
                   <img 
                     className="card-img-top" 
@@ -18,9 +45,8 @@ const Card = props => {
                     </p>
                     <div className="d-flex justify-content-between align-items-center">
                       <div className="btn-group">
-                          <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
-                          <button type="button" className="btn btn-sm btn-outline-secondary">Edit</button>
-                          <button type="button" className="btn btn-sm btn-outline-secondary">Delete</button>
+                          <Link to={`/update/${props.pokemon._id}`}><button className="btn btn-primary" type="button">edit</button></Link>
+                          <button type="button" className="btn btn-sm btn-danger" onClick={() => deleteThisPokemon(props.pokemon._id)}>Delete</button>
                       </div>
                       <small className="text-muted">{props.pokemon.name}</small>
                     </div>

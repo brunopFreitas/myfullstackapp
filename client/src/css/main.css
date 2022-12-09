@@ -27,3 +27,11 @@
   }
   
   .box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+  .logo-img {
+    margin-right: 5px;
+    align-self: center;
+    justify-self: center;
+    height: 30px;
+    width: auto;
+}

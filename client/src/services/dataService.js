@@ -10,7 +10,11 @@ class dataService{
 
     }
 
-    getOneData(){
+    getOneData(id, callback){
+        axios.get(`${process.env.REACT_APP_API_URL}/pokemon/${id}`)
+        .then(response=>{
+            callback(response.data)
+        })
 
     }
 
@@ -29,12 +33,33 @@ class dataService{
 
     }
 
-    updateData(){
+    updateData(param, APIdata, token, callback){
+        console.log(APIdata)
+        axios.put(`${process.env.REACT_APP_API_URL}/pokemon/${param}`, APIdata, token)
+        .then(
+            response => {
+                if(response.status=== 204) {
+                    callback(true)
+                }
+            })
+            .catch( error=>{
+                console.log(error.response)
+                callback(false)
+            })
 
     }
 
-    deleteData(){
-
+    deleteData(id, token, callback){
+        axios.delete(`${process.env.REACT_APP_API_URL}/pokemon/${id}`,token)
+        .then (
+            response => {
+                if(response.status=== 204) {
+                    callback(true)
+                }
+            })
+            .catch( error=>{
+                callback(false)
+            })
     }
 
 }
