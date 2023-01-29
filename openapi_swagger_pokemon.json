@@ -1,0 +1,346 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Pokemon API Methods",
+    "description": "API created for the Fullstack App class IT Web Programming 2022",
+    "version": "0.1"
+  },
+  "servers": [
+    {
+      "url": "https://w0448225-fullstack.onrender.com"
+    }
+  ],
+  "paths": {
+    "/pokemon": {
+      "get": {
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiJ9.ZHVtbXkxQGV4YW1wbGUuY29t.8hYEHrpGIanzk1h9tCjP4LymnQySrpqujFQWIYT8Ehk"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://w0448225-fullstack.onrender.com"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://w0448225-fullstack.onrender.com"
+        }
+      ],
+      "post": {
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiJ9.ZHVtbXkxQGV4YW1wbGUuY29t.8hYEHrpGIanzk1h9tCjP4LymnQySrpqujFQWIYT8Ehk"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "img": {
+                    "type": "string"
+                  },
+                  "num": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n    \"id\": 250,\r\n    \"num\": \"250\",\r\n    \"name\": \"Ho-Oh\",\r\n    \"img\": \"https://static.pokemonpets.com/images/monsters-images-800-800/250-Ho-Oh.webp\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://w0448225-fullstack.onrender.com"
+          }
+        ]
+      }
+    },
+    "/pokemon/_id": {
+      "get": {
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiJ9.ZHVtbXkxQGV4YW1wbGUuY29t.8hYEHrpGIanzk1h9tCjP4LymnQySrpqujFQWIYT8Ehk"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://w0448225-fullstack.onrender.com"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://w0448225-fullstack.onrender.com"
+        }
+      ],
+      "delete": {
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiJ9.ZHVtbXkxQGV4YW1wbGUuY29t.8hYEHrpGIanzk1h9tCjP4LymnQySrpqujFQWIYT8Ehk"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://w0448225-fullstack.onrender.com"
+          }
+        ]
+      },
+      "put": {
+        "description": "Auto generated using Swagger Inspector",
+        "parameters": [
+          {
+            "name": "x-auth-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "eyJhbGciOiJIUzI1NiJ9.ZHVtbXkxQGV4YW1wbGUuY29t.8hYEHrpGIanzk1h9tCjP4LymnQySrpqujFQWIYT8Ehk"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "img": {
+                    "type": "string"
+                  },
+                  "num": {
+                    "type": "string"
+                  },
+                  "name": {
+                    "type": "string"
+                  },
+                  "id": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n    \"id\": 250,\r\n    \"num\": \"250\",\r\n    \"name\": \"Ho-Oh\",\r\n    \"img\": \"https://static.pokemonpets.com/images/monsters-images-800-800/250-Ho-Oh.webp\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://w0448225-fullstack.onrender.com"
+          }
+        ]
+      }
+    },
+    "/pokemon/user/register": {
+      "post": {
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "firstName": {
+                    "type": "string"
+                  },
+                  "lastName": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n    \"firstName\": \"dummy\",\r\n    \"lastName\": \"21\",\r\n    \"email\": \"dummy21@example.com\",\r\n    \"password\": \"root\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://w0448225-fullstack.onrender.com"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://w0448225-fullstack.onrender.com"
+        }
+      ]
+    },
+    "/pokemon/user/login": {
+      "post": {
+        "description": "Auto generated using Swagger Inspector",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "examples": {
+                "0": {
+                  "value": "{\r\n \"email\": \"dummy21@example.com\",\r\n    \"password\": \"root\"\r\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Auto generated using Swagger Inspector",
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "type": "string"
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "servers": [
+          {
+            "url": "https://w0448225-fullstack.onrender.com"
+          }
+        ]
+      },
+      "servers": [
+        {
+          "url": "https://w0448225-fullstack.onrender.com"
+        }
+      ]
+    }
+  }
+}
