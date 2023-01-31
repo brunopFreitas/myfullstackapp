@@ -1,20 +1,31 @@
-import React from 'react';
-import { Link, useEffect } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import { Link } from 'react-router-dom';
 import authService from '../services/authService';
 import logo from '../img/pokemon_logo.png'
 import jwt_decode from "jwt-decode";
 
-const NavBar = () => {
+const NavBar = (props) => {
+
+  const [authUser, setAuthUser] = useState(props.authService)
+
+  useEffect(() => {
+    setAuthUser(props.authUser)
+  }, [props.authUser])
+
+    
 
     const getUserEmail = () => {
-      let token = authService.isAuthenticated()
-      if(token) {
-        let userCredential = jwt_decode(token)
+      if(authUser) {
+        let userCredential = jwt_decode(authUser)
         return (
           userCredential.email
         )
-      }
-      
+      }      
+    }
+
+    const signOut = () => {
+      authService.signout()
+      props.updateNav()
     }
 
     return (
@@ -33,24 +44,31 @@ const NavBar = () => {
             <li className="nav-item active">
               <Link to={`/`} className="nav-link">Home <span className="sr-only">(current)</span></Link>
             </li>
-            <li className="nav-item active">
+            {/* <li className="nav-item active">
               <Link to={`/signin`} className="nav-link">Login <span className="sr-only">(current)</span></Link>
             </li>
             <li className="nav-item active">
               <Link to={`/register`} className="nav-link">Register <span className="sr-only">(current)</span></Link>
-            </li>
+            </li> */}
           </ul>
         </div>
-        <div className={authService.isAuthenticated() ? 'nav-item dropdown' : 'hidden'}>
-              <a className="dropdown-toggle text-white text-decoration-none" href="/#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                {
-                  "Welcome " + getUserEmail()
-                }
-                </a>
-              <div className="dropdown-menu" aria-labelledby="dropdown07">
-                <Link to={`/signin`} className="dropdown-item" onClick={e => authService.signout()}>Logout</Link>
-              </div>
-        </div>
+        {
+            authUser
+              ?
+              <>
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle" href="/#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{getUserEmail()}</a>
+                  <div className="dropdown-menu" aria-labelledby="dropdown07"><Link className="dropdown-item" to="#" onClick={() => signOut()}>Sign Out</Link>
+                  </div>
+                </li>
+              </>
+              :
+              <>
+                <li className="nav-item"><Link className="nav-link" to="/signin">Signin</Link></li><li className="nav-item">
+                  <Link className="nav-link" to="/register">Register</Link>
+                </li>
+              </>
+          }
       </div>
     </nav>
     );

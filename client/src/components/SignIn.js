@@ -30,6 +30,7 @@ const SignIn = (props) => {
             authService.signin({ email, password }, (error)=> {
                 if(!error) {
                     navigate('/')
+                    props.updateNav()
                 }
                 else {
                     if(error.status===401) {
