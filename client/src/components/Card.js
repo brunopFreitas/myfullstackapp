@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 import dataService from '../services/dataService';
 import authService from '../services/authService';
 import { Link } from 'react-router-dom';
 
 const Card = props => {
+
+  const [isDeleted, setIsDeleted] = useState(props.handler)
+
+  useEffect(() => {
+    setIsDeleted()
+  }, )
 
   const navigate = useNavigate();
 
@@ -18,7 +24,7 @@ const Card = props => {
         };
         dataService.deleteData(id, config, (deleteSuccess)=> {
           if(deleteSuccess) {
-            console.log(deleteSuccess)
+            setIsDeleted(true)
           }
           else {
             console.log(deleteSuccess)
@@ -41,7 +47,7 @@ const Card = props => {
                   <div className="card-body">
                     <p className="card-text">
                         Name: {props.pokemon.name}
-                        <br/>                           
+                        <br/>                     
                     </p>
                     <div className="d-flex justify-content-between align-items-center">
                       <div className="btn-group">

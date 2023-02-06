@@ -11,6 +11,7 @@ class Main extends React.Component {
 
     this.state={
       pokemon: [],
+      del: false,
       pageInitial: 0,
       pageFinal: 10,
       filter: null
@@ -40,6 +41,10 @@ class Main extends React.Component {
       }
     )
    }
+
+   handler() {
+    console.log("Im deleting")
+  }
 
   //  I was trying to paginate
   //  handleClick(i){
@@ -93,13 +98,13 @@ class Main extends React.Component {
                 ?
                 this.state.pokemon.slice(-9).filter(pokemonName => pokemonName.name.toLowerCase().includes(`${this.state.filter}`.toLowerCase())).map(item => {
                   return (
-                    <Card pokemon={item} />
+                    <Card pokemon={item} del={this.state.del}/>
                   )
                 })
                 :
                 this.state.pokemon.slice(-9).map(item => {
                   return (
-                    <Card pokemon={item} />
+                    <Card pokemon={item} handler = {this.handler}/>
                   )
                 })
               }

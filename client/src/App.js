@@ -16,7 +16,7 @@ import authService from './services/authService';
 const App = () => {
 
   const [authUser, setAuthUser] = useState(authService.isAuthenticated())
-  
+ 
   const updateNav = () => {
     setAuthUser(authService.isAuthenticated())
   }

@@ -56,15 +56,15 @@ const NavBar = (props) => {
             authUser
               ?
               <>
-                <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="/#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{getUserEmail()}</a>
+                <li className="nav-item dropdown list-unstyled">
+                  <a className="nav-link dropdown-toggle text-decoration-none" href="/#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{getUserEmail()}</a>
                   <div className="dropdown-menu" aria-labelledby="dropdown07"><Link className="dropdown-item" to="#" onClick={() => signOut()}>Sign Out</Link>
                   </div>
                 </li>
               </>
               :
               <>
-                <li className="nav-item"><Link className="nav-link" to="/signin">Signin</Link></li><li className="nav-item">
+                <li className="nav-item list-unstyled"><Link className="nav-link" to="/signin">Signin</Link></li><li className="nav-item">
                   <Link className="nav-link" to="/register">Register</Link>
                 </li>
               </>
