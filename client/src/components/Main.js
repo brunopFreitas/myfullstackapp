@@ -1,9 +1,10 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import '../css/main.css'
 import 'font-awesome/css/font-awesome.min.css';
 import Card from './Card';
 import dataService from '../services/dataService';
+import authService from '../services/authService';
 
 class Main extends React.Component {
   constructor(props) {
@@ -11,19 +12,20 @@ class Main extends React.Component {
 
     this.state={
       pokemon: [],
-      del: false,
       pageInitial: 0,
       pageFinal: 10,
-      filter: null
+      filter: null,
+      arg1: null
     }
 
-    // this.rerenderParentCallback = this.rerenderParentCallback.bind(this);
+    var handleToUpdate = this.handleToUpdate.bind(this);
   }
 
-  // rerenderParentCallback() {
-  //   // this.forceUpdate();
-  //   console.log("calling my parent")
-  // }
+  handleToUpdate(someArg){
+    alert('We pass argument from Child to Parent: ' + someArg);
+    this.setState({arg1:someArg});
+    this.props.updateMain(someArg)
+}
 
   componentDidMount() {
     //fetch or axios api
@@ -41,10 +43,6 @@ class Main extends React.Component {
       }
     )
    }
-
-   handler() {
-    console.log("Im deleting")
-  }
 
   //  I was trying to paginate
   //  handleClick(i){
@@ -69,6 +67,7 @@ class Main extends React.Component {
   // }
 
   render() {
+    var handleToUpdate = this.handleToUpdate;
 
     return ( 
       <div>
@@ -98,13 +97,13 @@ class Main extends React.Component {
                 ?
                 this.state.pokemon.slice(-9).filter(pokemonName => pokemonName.name.toLowerCase().includes(`${this.state.filter}`.toLowerCase())).map(item => {
                   return (
-                    <Card pokemon={item} del={this.state.del}/>
+                    <Card pokemon={item} handleToUpdate = {handleToUpdate.bind(this)} key={item.id}/>
                   )
                 })
                 :
                 this.state.pokemon.slice(-9).map(item => {
                   return (
-                    <Card pokemon={item} handler = {this.handler}/>
+                    <Card pokemon={item} handleToUpdate = {handleToUpdate.bind(this)} key={item.id}/>
                   )
                 })
               }

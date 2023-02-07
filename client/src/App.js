@@ -16,9 +16,15 @@ import authService from './services/authService';
 const App = () => {
 
   const [authUser, setAuthUser] = useState(authService.isAuthenticated())
+  const [mainState, setmainState] = useState('')
  
   const updateNav = () => {
     setAuthUser(authService.isAuthenticated())
+  }
+
+  const updateMain = (arg) => {
+    setmainState(arg)
+    
   }
 
     return (
@@ -27,8 +33,8 @@ const App = () => {
           <NavBar authUser={authUser} updateNav={updateNav}/>
           <div id="main-content">
           <Routes>
-              <Route path='/' element={<Main />}/>
-              <Route path='/signin' element={<SignIn updateNav={updateNav}/> }/>
+              <Route path='/' element={<Main mainState={mainState} updateMain={updateMain}/>}/>
+              <Route path='/signin' element={<SignIn authUser={authUser} updateNav={updateNav}/> }/>
               <Route element={<ProtectedRoutes/>}>
                 <Route path='/create' element={<CreatePokemon />}/>
                 <Route path='/update/:id' element={<EditPokemon />}/>

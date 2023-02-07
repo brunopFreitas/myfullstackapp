@@ -6,12 +6,6 @@ import { Link } from 'react-router-dom';
 
 const Card = props => {
 
-  const [isDeleted, setIsDeleted] = useState(props.handler)
-
-  useEffect(() => {
-    setIsDeleted()
-  }, )
-
   const navigate = useNavigate();
 
   function deleteThisPokemon (id)  {
@@ -24,7 +18,7 @@ const Card = props => {
         };
         dataService.deleteData(id, config, (deleteSuccess)=> {
           if(deleteSuccess) {
-            setIsDeleted(true)
+            props.handleToUpdate(props.pokemon._id)
           }
           else {
             console.log(deleteSuccess)
@@ -35,7 +29,7 @@ const Card = props => {
 
 
     return ( 
-        <div className="col-md-4" key={props.pokemon.id}>
+        <div className="col-md-4">
                 <div className="card mb-4 box-shadow">
                   <img 
                     className="card-img-top" 

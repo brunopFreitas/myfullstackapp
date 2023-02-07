@@ -44,12 +44,6 @@ const NavBar = (props) => {
             <li className="nav-item active">
               <Link to={`/`} className="nav-link">Home <span className="sr-only">(current)</span></Link>
             </li>
-            {/* <li className="nav-item active">
-              <Link to={`/signin`} className="nav-link">Login <span className="sr-only">(current)</span></Link>
-            </li>
-            <li className="nav-item active">
-              <Link to={`/register`} className="nav-link">Register <span className="sr-only">(current)</span></Link>
-            </li> */}
           </ul>
         </div>
         {
@@ -64,7 +58,10 @@ const NavBar = (props) => {
               </>
               :
               <>
-                <li className="nav-item list-unstyled"><Link className="nav-link" to="/signin">Signin</Link></li><li className="nav-item">
+                <li className="nav-item list-unstyled">
+                  <Link className="nav-link" to="/signin">Signin</Link>
+                  </li>
+                <li className="nav-item list-unstyled">
                   <Link className="nav-link" to="/register">Register</Link>
                 </li>
               </>
