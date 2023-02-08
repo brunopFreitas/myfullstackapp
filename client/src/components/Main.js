@@ -15,16 +15,19 @@ class Main extends React.Component {
       pageInitial: 0,
       pageFinal: 10,
       filter: null,
-      arg1: null
+      cardToDelete: null
     }
 
     var handleToUpdate = this.handleToUpdate.bind(this);
   }
 
-  handleToUpdate(someArg){
-    alert('We pass argument from Child to Parent: ' + someArg);
-    this.setState({arg1:someArg});
-    this.props.updateMain(someArg)
+  handleToUpdate(cardToDelete){
+    this.setState({cardToDelete});
+    dataService.getData(pokemon => {
+      this.setState(
+        { pokemon }
+      )
+    })
 }
 
   componentDidMount() {

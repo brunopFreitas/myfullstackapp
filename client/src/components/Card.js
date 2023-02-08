@@ -6,8 +6,6 @@ import { Link } from 'react-router-dom';
 
 const Card = props => {
 
-  const navigate = useNavigate();
-
   function deleteThisPokemon (id)  {
     const token = authService.isAuthenticated();
     if(token) {
