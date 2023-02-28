@@ -44,28 +44,31 @@ const NavBar = (props) => {
             <li className="nav-item active">
               <Link to={`/`} className="nav-link">Home <span className="sr-only">(current)</span></Link>
             </li>
-          </ul>
-        </div>
-        {
+            {
             authUser
               ?
               <>
                 <li className="nav-item dropdown list-unstyled">
-                  <a className="nav-link dropdown-toggle text-decoration-none" href="/#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{getUserEmail()}</a>
-                  <div className="dropdown-menu" aria-labelledby="dropdown07"><Link className="dropdown-item" to="#" onClick={() => signOut()}>Sign Out</Link>
+                  <a className="nav-link dropdown-toggle text-decoration-none" href="/#" id="dropdown07" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {getUserEmail()}
+                  </a>
+                  <div className="dropdown-menu" aria-labelledby="dropdown07">
+                    <Link className="dropdown-item" to="#" onClick={() => signOut()}>Sign Out</Link>
                   </div>
                 </li>
               </>
               :
               <>
-                <li className="nav-item list-unstyled">
-                  <Link className="nav-link" to="/signin">Signin</Link>
-                  </li>
-                <li className="nav-item list-unstyled">
-                  <Link className="nav-link" to="/register">Register</Link>
-                </li>
+                    <li className="nav-item list-unstyled">
+                      <Link className="nav-link" to="/signin">Signin</Link>
+                    </li>
+                    <li className="nav-item list-unstyled">
+                      <Link className="nav-link" to="/register">Register</Link>
+                    </li>
               </>
           }
+          </ul>
+        </div>
       </div>
     </nav>
     );
